@@ -1,0 +1,11 @@
+.home {
+  display: grid;
+  padding: 2rem;
+  justify-items: center;
+  width: 100%;
+}
+
+.title {
+  font-size: 3rem;
+  color: #db822e;
+}

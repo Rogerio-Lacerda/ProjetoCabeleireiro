@@ -1,0 +1,84 @@
+.header {
+  background: #4d2c0f;
+  padding: 1rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  position: relative;
+}
+
+.titulo {
+  color: #db822e;
+}
+
+.cadastro,
+.content > a {
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 1rem 0;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav {
+  position: absolute;
+  top: 70px;
+  right: 30px;
+  background: #db822e;
+  padding: 1rem;
+  border-radius: 0 0 8px 8px;
+  z-index: 10;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+.cadastro:hover .nav {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.nav ul {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.nav a {
+  font-size: 0.8rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.divider {
+  height: 2px;
+  width: 8px;
+  background: #db822e;
+}
+
+.arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 12px solid #db822e;
+  top: -12px;
+  right: 13px;
+}
+
+.navActive {
+  border-bottom: 2px solid #fff;
+}

@@ -1,0 +1,22 @@
+.cadastro {
+  padding: 2rem;
+  display: grid;
+  width: 100%;
+  justify-items: center;
+}
+
+.form {
+  display: grid;
+  padding: 2rem;
+  border: 2px solid #db822e;
+  border-radius: 8px;
+  gap: 2rem;
+  width: 50%;
+}
+
+.form h2 {
+  font-size: 2rem;
+  padding-bottom: 0.5rem;
+  color: #db822e;
+  justify-self: center;
+}
