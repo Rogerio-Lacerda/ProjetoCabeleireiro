@@ -10,15 +10,15 @@ login_blueprint = Blueprint('login', __name__, url_prefix='/api')
 def cadastro():
     forms_cadastro = request.get_json()
     cliente = create_user(forms_cadastro)
-    return jsonify(cliente)
+    return jsonify(cliente), cliente['status_code']
 
 @clientes_blueprint.route(('/clientes/alterar/<int:id>'), methods=['PUT'])
 def alter_cliente(id):
     forms_client = request.get_json()
     cliente = alter_dados_cliente(forms_client, id)
-    return jsonify(cliente)
+    return jsonify(cliente), cliente['status_code']
 
 @clientes_blueprint.route(('clientes/remover/<int:id>'), methods=['DELETE'])
 def remov_cliente(id):
     cliente = remover_cliente(id)
-    return jsonify(cliente)
+    return jsonify(cliente), cliente['status_code']

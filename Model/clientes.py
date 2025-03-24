@@ -27,7 +27,7 @@ def alter_cliente(form, id):
     cliente = db.session.query(Clientes).filter_by(id=id).first()
     print(cliente)
     if cliente is None:
-        return "Cliente nao Existe"
+        return {'message': 'Cliente nao Existe', 'status_code': 400}
 
     if 'nome' in form and form['nome']:
         cliente.nome = form['nome']
@@ -43,13 +43,13 @@ def alter_cliente(form, id):
 
     db.session.commit()
 
-    return 'Cliente atualizado com sucesso'
+    return {'message': 'Cliente atualizado com sucesso', 'status_code': 200}
 
 def deletar_cliente(id):
     cliente = db.session.query(Clientes).filter_by(id=id).first()
     if cliente is None:
-        return 'Cliente nao Existe'
+        return {'message': 'Cliente nao Existe', 'status_code': 400}
     else:
         db.session.delete(cliente)
         db.session.commit()
-        return 'Cliente deletado com sucesso'
+        return {'message': 'Cliente deletado com sucesso', 'status_code': 200}

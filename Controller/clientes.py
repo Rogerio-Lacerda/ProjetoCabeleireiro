@@ -102,15 +102,15 @@ def validacao_form(form):
 def create_user(form):
     result_validacao = validacao_form(form)
     if result_validacao != True:
-        return {'message': 'Erro no Cadastro do Usuario', 'errors': result_validacao}
+        return {'message': 'Erro no Cadastro do Usuario', 'errors': result_validacao, 'status_code': 400}
     
     result_exist_vendedor = validacao_cliente(form)
 
     if result_exist_vendedor != True:
-        return{'message': result_exist_vendedor}
+        return{'message': result_exist_vendedor, 'status_code': 400}
 
     status = adicionar_cliente(form)
-    return {'message': status}
+    return {'message': status, 'status_code': 200}
 ##################################
 
 #### Edição do Cliente ####
@@ -205,14 +205,14 @@ def alter_validacao_form(form):
 def alter_dados_cliente(form, id):
     result_validacao = alter_validacao_form(form)
     if result_validacao != True:
-        return {'message': 'Erro ao Alterar Dados do Usuario', 'errors': result_validacao}
+        return {'message': 'Erro ao Alterar Dados do Usuario', 'errors': result_validacao, 'status_code': 400}
     
     status = alter_cliente(form, id)
-    return {'message': status}
+    return status
 
 def remover_cliente(id):
     status = deletar_cliente(id)
-    return {'message': status}
+    return status
 
     
 
