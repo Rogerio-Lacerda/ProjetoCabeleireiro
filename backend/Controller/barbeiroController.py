@@ -132,7 +132,7 @@ def validacao_form(form):
     try:
         validacao_data_nascimento(form)
     except ValueError as e:
-        errors['nascimento'] = str(e)
+        errors['data_nascimento'] = str(e)
 
     if errors:
         return errors

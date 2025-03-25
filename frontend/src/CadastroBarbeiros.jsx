@@ -3,6 +3,8 @@ import Header from './Header';
 import styles from './css/CadastroBarbeiros.module.css';
 import Button from './Button';
 import Input from './Input';
+import { useNavigate } from 'react-router-dom';
+import Error from './Error';
 
 const CadastroBarbeiros = () => {
   const [form, setForm] = React.useState({
@@ -13,16 +15,60 @@ const CadastroBarbeiros = () => {
     especialidade: '',
     data_nascimento: '',
   });
-  // const [error, setError] = React.useState('');
-  // const [sucess, setSucess] = React.useState('');
-  // const navigate = useNavigate();
+  const [error, setError] = React.useState('');
+  const [sucess, setSucess] = React.useState('');
+  const navigate = useNavigate();
 
   const handleChange = ({ target }) => {
     const { id, value } = target;
     setForm({ ...form, [id]: value });
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setSucess('');
+
+    try {
+      const response = await fetch(
+        'http://127.0.0.1:8888/api/barbeiro/cadastro/1',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(form),
+        },
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log('Barbeiro cadastrado com sucesso:', data);
+
+        setError('');
+        setSucess('Barbeiro cadastrado com sucesso!');
+        setTimeout(() => {
+          navigate('/');
+        }, 2000);
+      } else {
+        console.error('Erro no cadastro:', data);
+
+        setSucess('');
+        if (data.message === 'Email já cadastrado.') {
+          setError([data.message]);
+        } else {
+          setError(
+            Object.entries(data.errors).map(
+              ([chave, valor]) => `${chave}: ${valor}`,
+            ),
+          );
+        }
+      }
+    } catch (error) {
+      console.error('Erro na requisição:', error);
+    }
+  };
 
   return (
     <>
@@ -72,11 +118,29 @@ const CadastroBarbeiros = () => {
           <Input
             id="data_nascimento"
             label="Data de nascimento"
-            value={form.especialidade}
+            value={form.data_nascimento}
             onChange={handleChange}
             type="date"
             required
           />
+
+          {error ? (
+            <div className={styles.error}>
+              <h3>Erro ao cadastrar barbeiro</h3>
+              <ul>
+                {error.map((item, index) => (
+                  <li key={index}>
+                    <Error texto={item} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+          {sucess ? (
+            <div className={styles.sucess}>
+              <h3>{sucess}</h3>
+            </div>
+          ) : null}
 
           <Button texto="Cadastrar" className={styles.button} />
         </form>

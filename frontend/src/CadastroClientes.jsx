@@ -23,7 +23,9 @@ const CadastroClientes = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Impede o comportamento padrão do formulário (recarregar a página)
+    e.preventDefault();
+    setError('');
+    setSucess('');
 
     try {
       const response = await fetch(
