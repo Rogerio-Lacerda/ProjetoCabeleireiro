@@ -1,3 +1,5 @@
+import datetime
+import re
 from Model.adminModel import consultar_admin
 from Model.barbeiroModel import adicionar_barbeiro, alterar_barbeiro, validacao_barbeiro, deletar_barbeiro, buscar_barbeiro
 
@@ -303,6 +305,6 @@ def remover_barbeiro(idBarbeiro, idAdmin):
         return response
     return validar_admin
 
-def buscar_barbeiro(id):
+def get_barbeiro(id):
     response = buscar_barbeiro(id)
     return response
