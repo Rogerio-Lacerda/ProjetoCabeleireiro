@@ -25,7 +25,7 @@ def adicionar_barbeiro(data):
     return {'message': 'Barbeiro cadastrado com sucesso', 'status_code': 200}
 
 def validacao_barbeiro(data):
-    email_validado = Barbeiros.query.filter_by(email=form['email']).first()
+    email_validado = Barbeiros.query.filter_by(email=data['email']).first()
     if email_validado:
         return {'message': 'Email já cadastrado!', 'status_code': 400}
     return True

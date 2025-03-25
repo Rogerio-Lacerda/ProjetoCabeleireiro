@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 import re
 from Model.adminModel import consultar_admin
 from Model.barbeiroModel import adicionar_barbeiro, alterar_barbeiro, validacao_barbeiro, deletar_barbeiro, buscar_barbeiro
@@ -85,11 +85,6 @@ def validacao_especialidade(data):
     if len(data['especialidade']) > 255:
         raise ValueError("Campo deve ter no máximo 255 caracteres")
     
-    valid_especialidade = r"@([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$"
-
-    if re.search(valid_especialidade, data['especialidade']) is None:
-        raise ValueError("Campo inválido")
-    
     return True
 
 def validacao_data_nascimento(data):
@@ -98,12 +93,12 @@ def validacao_data_nascimento(data):
     
     if data['data_nascimento'] is None:
         raise ValueError("Campo está vazio.")
+    try:
+        # Valida e converte a string para um objeto datetime
+        valid_data_nascimento = datetime.strptime(data['data_nascimento'], "%Y-%m-%d")
+    except ValueError:
+        raise ValueError("Formato de data inválido. Use AAAA/MM/DD.")
 
-    valid_data_nascimento = datetime.strptime(data['data_nascimento'], "%d/%m/%Y")
-
-    if re.search(valid_data_nascimento, data['data_nascimento']) is None:
-        raise ValueError("Campo inválido")
-    
     return True
 
 def validacao_form(form):
