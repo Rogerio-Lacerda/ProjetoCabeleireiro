@@ -2,6 +2,9 @@ from config.config import app, db
 from Routes.clientes import clientes_blueprint
 from Routes.admin import admin_blueprint
 from Routes.barber import barbeiro_blueprint
+from flask_cors import CORS
+
+CORS(app) 
 
 app.register_blueprint(clientes_blueprint)
 app.register_blueprint(barbeiro_blueprint)

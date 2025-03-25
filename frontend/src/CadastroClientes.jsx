@@ -3,6 +3,8 @@ import Header from './Header';
 import styles from './css/CadastroClientes.module.css';
 import Input from './Input';
 import Button from './Button';
+import Error from './Error';
+import { useNavigate } from 'react-router-dom';
 
 const CadastroClientes = () => {
   const [form, setForm] = React.useState({
@@ -11,6 +13,9 @@ const CadastroClientes = () => {
     celular: '',
     senha: '',
   });
+  const [error, setError] = React.useState('');
+  const [sucess, setSucess] = React.useState('');
+  const navigate = useNavigate();
 
   const handleChange = ({ target }) => {
     const { id, value } = target;
@@ -35,11 +40,26 @@ const CadastroClientes = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // Aqui você pode exibir uma mensagem de sucesso ou redirecionar o usuário
         console.log('Cliente cadastrado com sucesso:', data);
+
+        setError('');
+        setSucess('Cliente cadastrado com sucesso!');
+        setTimeout(() => {
+          navigate('/');
+        }, 2000);
       } else {
-        // Exibe mensagem de erro, caso o cadastro falhe
         console.error('Erro no cadastro:', data);
+
+        setSucess('');
+        if (data.message === 'Email já cadastrado.') {
+          setError([data.message]);
+        } else {
+          setError(
+            Object.entries(data.errors).map(
+              ([chave, valor]) => `${chave}: ${valor}`,
+            ),
+          );
+        }
       }
     } catch (error) {
       console.error('Erro na requisição:', error);
@@ -48,7 +68,6 @@ const CadastroClientes = () => {
 
   return (
     <>
-      <Header />
       <div className={styles.cadastro}>
         <form className={styles.form} onSubmit={handleSubmit}>
           <h2>Cadastro Clientes</h2>
@@ -84,6 +103,24 @@ const CadastroClientes = () => {
             type="password"
             required
           />
+          {error ? (
+            <div className={styles.error}>
+              <h3>Erro ao cadastrar cliente</h3>
+              <ul>
+                {error.map((item, index) => (
+                  <li key={index}>
+                    <Error texto={item} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+          {sucess ? (
+            <div className={styles.sucess}>
+              <h3>{sucess}</h3>
+            </div>
+          ) : null}
+
           <Button texto="Cadastrar" className={styles.button} />
         </form>
       </div>

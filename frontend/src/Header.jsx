@@ -16,16 +16,16 @@ const Header = () => {
             <div className={styles.arrow}></div>
             <ul>
               <li>
-                <NavLink to="cadastro-cliente">
+                <NavLink to="cadastro-cliente" end>
                   Clientes
                   <span>→</span>
                 </NavLink>
               </li>
               <div className={styles.divider}></div>
               <li>
-                <a href="#">
+                <NavLink to="cadastro-barbeiro">
                   Barbeiros <span>→</span>
-                </a>
+                </NavLink>
               </li>
             </ul>
           </nav>
