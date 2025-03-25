@@ -304,6 +304,6 @@ def remover_barbeiro(idBarbeiro, idAdmin):
         return response
     return validar_admin
 
-def buscar_barbeiro(id):
+def get_barbeiro(id):
     response = buscar_barbeiro(id)
     return response
