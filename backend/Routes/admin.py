@@ -1,5 +1,4 @@
 from flask import Blueprint, Flask,request, jsonify
-from config.config import app
 from Controller.adminController import criar_admin, get_admin
 
 admin_blueprint = Blueprint('administrador', __name__, url_prefix='/api')
@@ -10,7 +9,7 @@ def cadastro(idAdmin):
     admin = criar_admin(forms_cadastro,idAdmin)
     return jsonify(admin), admin['status_code']
 
-@admin_blueprint.route(('/admin/cadastro/<int:idAdmin>'), methods=['GET'])
+@admin_blueprint.route(('/admin/<int:idAdmin>'), methods=['GET'])
 def consulta(idAdmin):
     admin = get_admin(idAdmin)
     return jsonify(admin), admin['status_code']
