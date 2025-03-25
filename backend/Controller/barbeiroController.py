@@ -1,3 +1,5 @@
+import datetime
+import re
 from Model.adminModel import consultar_admin
 from Model.barbeiroModel import adicionar_barbeiro, alterar_barbeiro, validacao_barbeiro, deletar_barbeiro, buscar_barbeiro
 
@@ -158,7 +160,6 @@ def criar_barbeiro(form, idAdmin):
         return response
     return validar_admin
 
-
 def alter_validacao_nome(form):
     if 'nome' not in form:
         return True
@@ -247,7 +248,7 @@ def alter_validacao_data_nascimento(data):
     
     return True
 
-def alter_validacao_form(form, idAdmin):
+def alter_validacao_form(form):
     errors = {}
     
     try:
@@ -299,7 +300,7 @@ def alter_dados_barbeiro(form, idBarbeiro, idAdmin):
 def remover_barbeiro(idBarbeiro, idAdmin):
     validar_admin = consultar_admin(idAdmin)
     if validar_admin['status_code'] == 200:
-        response = deletar_barbeiro(id)
+        response = deletar_barbeiro(idBarbeiro)
         return response
     return validar_admin
 
