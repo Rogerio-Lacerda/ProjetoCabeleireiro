@@ -2,6 +2,7 @@ from config.config import app, db
 from Routes.clientes import clientes_blueprint
 from Routes.admin import admin_blueprint
 from Routes.barber import barbeiro_blueprint
+from Routes.login import login_blueprint
 from flask_cors import CORS
 
 CORS(app) 
@@ -9,6 +10,7 @@ CORS(app)
 app.register_blueprint(clientes_blueprint)
 app.register_blueprint(barbeiro_blueprint)
 app.register_blueprint(admin_blueprint)
+app.register_blueprint(login_blueprint)
 
 with app.app_context():
     db.create_all()

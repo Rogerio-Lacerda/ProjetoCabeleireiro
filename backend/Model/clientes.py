@@ -53,3 +53,11 @@ def deletar_cliente(id):
         db.session.delete(cliente)
         db.session.commit()
         return {'message': 'Cliente deletado com sucesso', 'status_code': 200}
+    
+def consultar_cliente(email):
+    dados_cliente = db.session.query(Clientes).filter_by(email=email).first() 
+    if dados_cliente is None:
+        return {'message': 'E-mail Cliente não existe!', 'status_code': 404}
+    else:
+        return {'message': dados_cliente, 'status_code': 200}
+    

@@ -26,3 +26,11 @@ def consultar_admin(id):
         return {'message': 'Administrador não existe!', 'status_code': 404}
     else:
         return {'message': admin, 'status_code': 200}
+    
+
+def consultar_admin_email(email):
+    dados_admin = db.session.query(Admin).filter_by(email=email).first() 
+    if dados_admin is None:
+        return {'message': 'E-mail Administrador não existe!', 'status_code': 404}
+    else:
+        return {'message': dados_admin, 'status_code': 200}
