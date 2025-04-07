@@ -1,0 +1,40 @@
+.cadastro {
+    padding: 2rem;
+    display: grid;
+    width: 100%;
+    justify-items: center;
+  }
+  
+  .form {
+    display: grid;
+    padding: 2rem;
+    border: 2px solid #db822e;
+    border-radius: 8px;
+    gap: 2rem;
+    width: 50%;
+  }
+  
+  .form h2 {
+    font-size: 2rem;
+    padding-bottom: 0.5rem;
+    color: #db822e;
+    justify-self: center;
+  }
+  
+  .error {
+    display: grid;
+    gap: 0.5rem;
+  }
+  
+  .error h3 {
+    color: #b51f21;
+  }
+  
+  .error ul {
+    display: grid;
+    gap: 1rem;
+  }
+  
+  .sucess h3 {
+    color: #0aff0a;
+  }

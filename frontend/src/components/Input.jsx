@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './css/input.module.css';
+import styles from '../css/components/Input.module.css';
 
 const Input = ({ id, label, onChange, ...props }) => {
   return (
