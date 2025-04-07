@@ -15,7 +15,7 @@ def adicionar_admin(data):
     return {'message': 'Administrador cadastrado com sucesso', 'status_code': 200}
 
 def validacao_admin(data):
-    email_validado = Admin.query.filter_by(email=form['email']).first()
+    email_validado = Admin.query.filter_by(email=data['email']).first()
     if email_validado:
         return {'message': 'Email já cadastrado!', 'status_code': 400}
     return True
