@@ -4,8 +4,6 @@ from Controller.clientes import create_user, alter_dados_cliente, remover_client
 
 clientes_blueprint = Blueprint('clientes', __name__, url_prefix='/api')
 
-login_blueprint = Blueprint('login', __name__, url_prefix='/api')
-
 @clientes_blueprint.route(('/clientes/cadastro'), methods=['POST'])
 def cadastro():
     forms_cadastro = request.get_json()

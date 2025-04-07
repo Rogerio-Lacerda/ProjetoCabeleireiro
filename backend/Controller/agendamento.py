@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta, date, time
-from Model.servico import Servico
+from Model.servicos import BarbeariaServicos
 from Model.agendamento import Agendamento, criar_agendamento_db
 from config.config import db
 
@@ -55,10 +55,10 @@ def validacao_inicio_agend(form):
         raise ValueError("Formato de hora inválido. Use 'HH:MM'.")
 
 def buscar_duracao_servico(service_id):
-    servico = Servico.query.filter_by(id=service_id).first()
+    servico = BarbeariaServicos.query.filter_by(id=service_id).first()
     if not servico:
         raise ValueError("Serviço não encontrado.")
-    return servico.duracao  # em minutos
+    return servico.duracao_minutos  # em minutos
 
 def calcular_fim_agend(inicio, duracao):
     if not isinstance(duracao, int):
