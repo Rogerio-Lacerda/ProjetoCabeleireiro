@@ -1,5 +1,5 @@
 import re
-from Model.clientes import adicionar_cliente, validacao_cliente, alter_cliente, deletar_cliente 
+from Model.clientes import adicionar_cliente, validacao_cliente, alter_cliente, deletar_cliente, buscar_cliente
 
 ### Validação Cadastro ###
 def validacao_nome(form):
@@ -208,6 +208,10 @@ def alter_dados_cliente(form, id):
         return {'message': 'Erro ao Alterar Dados do Usuario', 'errors': result_validacao, 'status_code': 400}
     
     status = alter_cliente(form, id)
+    return status
+
+def listar_cliente(id):
+    status = buscar_cliente(id)
     return status
 
 def remover_cliente(id):

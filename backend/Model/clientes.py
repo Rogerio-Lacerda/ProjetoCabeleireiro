@@ -45,6 +45,14 @@ def alter_cliente(form, id):
 
     return {'message': 'Cliente atualizado com sucesso', 'status_code': 200}
 
+def buscar_cliente(id):
+    cliente = db.session.query(Clientes).filter_by(id=id).first()
+    if cliente is None:
+        return {'message': 'Cliente não existe!', 'status_code': 404}
+    else:
+        print(cliente)
+        return {'message': "Cliente Existente", 'status_code': 200, 'informacoes_cliente': [{"id": cliente.id, "nome": cliente.nome, "email": cliente.email, "numero_cel": cliente.numero_cel}]}
+
 def deletar_cliente(id):
     cliente = db.session.query(Clientes).filter_by(id=id).first()
     if cliente is None:
