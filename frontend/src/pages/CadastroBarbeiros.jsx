@@ -1,17 +1,19 @@
 import React from 'react';
-import Header from './Header';
-import styles from './css/CadastroClientes.module.css';
-import Input from './Input';
-import Button from './Button';
-import Error from './Error';
+import Header from '../layout/Header';
+import styles from '../css/pages/CadastroBarbeiros.module.css';
+import Button from '../components/Button';
+import Input from '../components/Input';
 import { useNavigate } from 'react-router-dom';
+import Error from '../components/Error';
 
-const CadastroClientes = () => {
+const CadastroBarbeiros = () => {
   const [form, setForm] = React.useState({
     nome: '',
     email: '',
     celular: '',
     senha: '',
+    especialidade: '',
+    data_nascimento: '',
   });
   const [error, setError] = React.useState('');
   const [sucess, setSucess] = React.useState('');
@@ -29,7 +31,7 @@ const CadastroClientes = () => {
 
     try {
       const response = await fetch(
-        'http://127.0.0.1:8888/api/clientes/cadastro',
+        'http://127.0.0.1:8888/api/barbeiro/cadastro/1',
         {
           method: 'POST',
           headers: {
@@ -42,10 +44,10 @@ const CadastroClientes = () => {
       const data = await response.json();
 
       if (response.ok) {
-        console.log('Cliente cadastrado com sucesso:', data);
+        console.log('Barbeiro cadastrado com sucesso:', data);
 
         setError('');
-        setSucess('Cliente cadastrado com sucesso!');
+        setSucess('Barbeiro cadastrado com sucesso!');
         setTimeout(() => {
           navigate('/');
         }, 2000);
@@ -72,7 +74,7 @@ const CadastroClientes = () => {
     <>
       <div className={styles.cadastro}>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <h2>Cadastro Clientes</h2>
+          <h2>Cadastro Barbeiros</h2>
           <Input
             id="nome"
             label="Nome"
@@ -105,9 +107,26 @@ const CadastroClientes = () => {
             type="password"
             required
           />
+          <Input
+            id="especialidade"
+            label="Especialidade"
+            value={form.especialidade}
+            onChange={handleChange}
+            type="text"
+            required
+          />
+          <Input
+            id="data_nascimento"
+            label="Data de nascimento"
+            value={form.data_nascimento}
+            onChange={handleChange}
+            type="date"
+            required
+          />
+
           {error ? (
             <div className={styles.error}>
-              <h3>Erro ao cadastrar cliente</h3>
+              <h3>Erro ao cadastrar barbeiro</h3>
               <ul>
                 {error.map((item, index) => (
                   <li key={index}>
@@ -130,4 +149,4 @@ const CadastroClientes = () => {
   );
 };
 
-export default CadastroClientes;
+export default CadastroBarbeiros;

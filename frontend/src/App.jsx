@@ -1,9 +1,10 @@
 import './App.css';
-import Header from './Header';
+import Header from './layout/Header';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './Home';
-import CadastroClientes from './CadastroClientes';
-import CadastroBarbeiros from './CadastroBarbeiros';
+import Home from './pages/Home';
+import CadastroClientes from './pages/CadastroClientes';
+import CadastroBarbeiros from './pages/CadastroBarbeiros';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -13,8 +14,11 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="cadastro-cliente" element={<CadastroClientes />} />
         <Route path="cadastro-barbeiro" element={<CadastroBarbeiros />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
+
+    
   );
 }
 
