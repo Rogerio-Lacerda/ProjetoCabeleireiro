@@ -1,6 +1,6 @@
 from flask import Blueprint, Flask,request, jsonify
 from config.config import app
-from Controller.clientes import create_user, alter_dados_cliente, remover_cliente
+from Controller.clientes import create_user, alter_dados_cliente, remover_cliente, listar_cliente
 
 clientes_blueprint = Blueprint('clientes', __name__, url_prefix='/api')
 
@@ -8,6 +8,11 @@ clientes_blueprint = Blueprint('clientes', __name__, url_prefix='/api')
 def cadastro():
     forms_cadastro = request.get_json()
     cliente = create_user(forms_cadastro)
+    return jsonify(cliente), cliente['status_code']
+
+@clientes_blueprint.route(('/clientes/<int:id>'), methods=['GET'])
+def consulta(id):
+    cliente = listar_cliente(id)
     return jsonify(cliente), cliente['status_code']
 
 @clientes_blueprint.route(('/clientes/alterar/<int:id>'), methods=['PUT'])
