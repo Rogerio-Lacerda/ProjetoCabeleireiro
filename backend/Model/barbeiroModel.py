@@ -10,6 +10,13 @@ class Barbeiros(db.Model):
     especialidade = db.Column(db.String(255), nullable=False)
     data_nascimento = db.Column(db.Date, nullable=False)
 
+    def serialize(self):
+        return {
+            'id': self.id,
+            'nome': self.nome,
+            'especialidade': self.especialidade
+        }
+
 
 def adicionar_barbeiro(data):
     barbeiro = Barbeiros(
@@ -74,3 +81,12 @@ def consultar_barbeiro_email(email):
     else:
         return {'message': dados_barber, 'status_code': 200}
     
+def buscar_barbeiros():
+    barbeiros = db.session.query(Barbeiros).all()
+    
+    if not barbeiros:
+        return {'message': 'Nenhum barbeiro encontrado!', 'status_code': 404}
+    
+    barbeiros_serializados = [barbeiro.serialize() for barbeiro in barbeiros]
+
+    return {'message': barbeiros_serializados, 'status_code': 200}

@@ -1,10 +1,10 @@
-from flask import Blueprint, Flask, request, jsonify
-from Controller.loginController  import validacao_email
+from flask import Blueprint, request, jsonify
+from Controller.loginController import validacao_email
 
 login_blueprint = Blueprint('login', __name__, url_prefix='/api')
 
 @login_blueprint.route('/login', methods=['POST'])
 def login():
-    dados_login = request.json()
+    dados_login = request.get_json()
     validar_login = validacao_email(dados_login)
     return jsonify(validar_login), validar_login['status_code']

@@ -12,12 +12,23 @@
   color: #db822e;
 }
 
-.cadastro,
+.user,
 .content > a {
   color: #fff;
   font-size: 1.2rem;
   cursor: pointer;
   padding: 1rem 0;
+}
+
+.user {
+  padding: 0.5rem;
+  background: #db822e;
+  border-radius: 0.3rem;
+}
+
+.user:hover {
+  background: #f78b54;
+  border-radius: 0.3rem 0.3rem 0 0.3rem;
 }
 
 .content {
@@ -28,8 +39,8 @@
 
 .nav {
   position: absolute;
-  top: 70px;
-  right: 30px;
+  top: 62px;
+  right: 48px;
   background: #db822e;
   padding: 1rem;
   border-radius: 0 0 8px 8px;
@@ -40,7 +51,7 @@
   transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
 }
 
-.cadastro:hover .nav {
+.user:hover .nav {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -51,7 +62,7 @@
   gap: 0.5rem;
 }
 
-.nav a {
+.nav li {
   font-size: 0.8rem;
   color: #fff;
   display: flex;
@@ -66,7 +77,7 @@
   background: #db822e;
 }
 
-.arrow {
+/* .arrow {
   position: absolute;
   width: 0;
   height: 0;
@@ -77,7 +88,7 @@
   border-bottom: 12px solid #db822e;
   top: -12px;
   right: 13px;
-}
+} */
 
 .navActive {
   border-bottom: 2px solid #fff;

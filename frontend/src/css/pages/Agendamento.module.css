@@ -1,0 +1,157 @@
+.agendamento {
+  padding: 2rem;
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 2rem;
+  padding-bottom: 0.5rem;
+  color: #db822e;
+  justify-self: center;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: start;
+  gap: 2rem;
+}
+
+.barbeiros {
+  display: grid;
+  gap: 1rem;
+}
+
+.barbeiros h2 {
+  color: #4d2c0f;
+}
+
+.barbeiros h2::after {
+  content: '';
+  height: 4px;
+  width: 20px;
+  background: #4d2c0f;
+  border-radius: 0.5rem;
+  display: block;
+}
+
+.barbeiros ul {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.barbeiros li {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 1rem;
+  border-top: 1px solid #db822e;
+  border-bottom: 1px solid #db822e;
+  cursor: pointer;
+}
+
+.barbeiros span {
+  font-size: 0.8rem;
+  color: #db822e;
+}
+
+.barbeiros li:hover,
+.barbeiros li:hover span {
+  background: #db822e;
+  color: #fff !important;
+}
+
+.barbeiroSelected,
+.barbeiroSelected span {
+  background: #db822e !important;
+  color: #fff !important;
+}
+
+.datas {
+  display: grid;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.datasContent {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+
+.datas h2 {
+  color: #4d2c0f;
+  align-self: start;
+}
+
+.datas h2::after {
+  content: '';
+  height: 4px;
+  width: 20px;
+  background: #4d2c0f;
+  border-radius: 0.5rem;
+  display: block;
+}
+
+.datas ul {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  align-self: start;
+}
+
+.datas li {
+  padding: 0.5rem;
+  border-right: 1px solid #db822e;
+  border-left: 1px solid #db822e;
+  cursor: pointer;
+}
+
+.datas li:hover,
+.dataSelected {
+  background: #db822e;
+  color: #fff !important;
+}
+
+.button {
+  align-self: end;
+  justify-self: end;
+}
+
+.horas {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 1fr;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.horas p {
+  padding: 0.5rem;
+  border-right: 1px solid #db822e;
+  border-left: 1px solid #db822e;
+  cursor: pointer;
+}
+
+.horas p:hover,
+.horasSelected {
+  background: #db822e;
+  color: #fff !important;
+}
+
+.sucess {
+  color: #0aff0a;
+  justify-self: center;
+  font-size: 1.3rem;
+}
+
+.error {
+  color: #b51f21;
+  justify-self: center;
+  font-size: 1.3rem;
+}

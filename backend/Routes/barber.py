@@ -1,5 +1,5 @@
 from flask import Blueprint, Flask,request, jsonify
-from Controller.barbeiroController import criar_barbeiro, get_barbeiro, alterar_barbeiro, deletar_barbeiro
+from Controller.barbeiroController import criar_barbeiro, get_barbeiro, alterar_barbeiro, deletar_barbeiro, get_barbeiros
 
 
 barbeiro_blueprint = Blueprint('barbeiro', __name__, url_prefix='/api')
@@ -26,3 +26,7 @@ def delete_barber(idBarbeiro):
     barbeiro = deletar_barbeiro(idBarbeiro)
     return jsonify(barbeiro), barbeiro['status_code']
 
+@barbeiro_blueprint.route(('/barbeiros'), methods=['GET'])
+def consulta_barbeiros():
+    barbeiros = get_barbeiros()
+    return jsonify(barbeiros), barbeiros['status_code']

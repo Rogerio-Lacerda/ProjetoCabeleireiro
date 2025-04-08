@@ -62,10 +62,12 @@ def deletar_cliente(id):
         db.session.commit()
         return {'message': 'Cliente deletado com sucesso', 'status_code': 200}
     
-def consultar_cliente(email):
-    dados_cliente = db.session.query(Clientes).filter_by(email=email).first() 
+def consultar_cliente(dados_login):
+    dados_cliente = db.session.query(Clientes).filter_by(email=dados_login['email']).first() 
     if dados_cliente is None:
-        return {'message': 'E-mail Cliente não existe!', 'status_code': 404}
+        return {'message': 'E-mail não existe!', 'status_code': 404}
+    elif dados_cliente.email == dados_login['email'] and dados_cliente.senha == dados_login['senha']:
+        return {'message': {'nome': dados_cliente.nome, 'email': dados_cliente.email, "id": dados_cliente.id}, 'status_code': 200}
     else:
-        return {'message': dados_cliente, 'status_code': 200}
+        return {'message': 'E-mail ou Senha incoreto!', 'status_code': 404}
     

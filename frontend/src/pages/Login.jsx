@@ -1,34 +1,42 @@
-import React from "react";
-import Button from "../components/Button";
-import Input from "../components/Input";
-import { useNavigate } from "react-router-dom";
-import Error from "../components/Error";
+import React from 'react';
+import Button from '../components/Button';
+import Input from '../components/Input';
+import { useNavigate } from 'react-router-dom';
+import Error from '../components/Error';
 import styles from '../css/pages/Login.module.css';
+import { UserContext } from '../UserContext';
 
 const Login = () => {
-  console.log("Login carregado!");
   const [form, setForm] = React.useState({
-    email: "",
-    senha: "",
+    email: '',
+    senha: '',
   });
 
-  const [error, setError] = React.useState("");
-  const [sucess, setSucess] = React.useState("");
+  const [error, setError] = React.useState('');
+  const [sucess, setSucess] = React.useState('');
   const navigate = useNavigate();
+  const { user, setUser } = React.useContext(UserContext);
+
   const handleChange = async (e) => {
     setForm({ ...form, [e.target.id]: e.target.value });
   };
+
+  React.useEffect(() => {
+    if (user && user.isLogin) {
+      navigate('/');
+    }
+  }, [user, navigate]);
+
   const handleLogin = async (e) => {
     e.preventDefault();
-
-    setError("");
-    setSucess("");
+    setError('');
+    setSucess('');
 
     try {
-      const response = await fetch("http://127.0.0.1:8888/api/login", {
-        method: "POST",
+      const response = await fetch('http://127.0.0.1:8888/api/login', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(form),
       });
@@ -36,32 +44,39 @@ const Login = () => {
       const data = await response.json();
 
       if (response.ok) {
-        console.log("Seja bem vindo!", data);
+        console.log('Seja bem vindo!', data);
 
-        setError("");
-        setSucess("Usuário logado com sucesso!");
+        setError('');
+        setSucess('Usuário logado com sucesso!');
+
+        const loggedUser = {
+          isLogin: true,
+          nome: data.message.nome,
+          id: data.message.id,
+        };
+        setUser(loggedUser);
+
         setTimeout(() => {
-          navigate("/");
+          navigate('/');
         }, 2000);
-      } 
-      else {
-        console.error("Erro no login:", data);
+      } else {
+        console.error('Erro no login:', data);
 
-        setSucess("");
-        if (data.message === "Senha incorreta!") {
+        setSucess('');
+        setUser({ isLogin: false, nome: '', id: '0' });
+
+        if (data) {
           setError([data.message]);
-        } else if (data.message === "Usuário não encontrado!") {
-          setError([data.message]);
-        } else {
-          setError(
-            Object.entries(data.errors).map(
-              ([chave, valor]) => `${chave}: ${valor}`
-            )
-          );
         }
+
+        // if (data.message === 'Senha incorreta!') {
+        //   setError([data.message]);
+        // } else if (data.message === 'Usuário não encontrado!') {
+        //   setError([data.message]);
+        // }
       }
     } catch (error) {
-      console.error("Erro na requisição:", error);
+      console.error('Erro na requisição:', error);
     }
   };
 

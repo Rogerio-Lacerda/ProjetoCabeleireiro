@@ -1,7 +1,7 @@
 from datetime import datetime
 import re
 from Model.adminModel import consultar_admin
-from Model.barbeiroModel import adicionar_barbeiro, alterar_barbeiro, validacao_barbeiro, deletar_barbeiro, buscar_barbeiro
+from Model.barbeiroModel import adicionar_barbeiro, alterar_barbeiro, validacao_barbeiro, deletar_barbeiro, buscar_barbeiro, buscar_barbeiros
 
 def validacao_nome(data):
     if "nome" not in data:
@@ -96,7 +96,7 @@ def validacao_data_nascimento(data):
     try:
         valid_data_nascimento = datetime.strptime(data['data_nascimento'], "%Y-%m-%d")
     except ValueError:
-        raise ValueError("Formato de data inválido. Use AAAA/MM/DD.")
+        raise ValueError("Formato de data inválido. Use AAAA-MM-DD.")
 
     return True
 
@@ -300,4 +300,8 @@ def remover_barbeiro(idBarbeiro, idAdmin):
 
 def get_barbeiro(id):
     response = buscar_barbeiro(id)
+    return response
+
+def get_barbeiros():
+    response = buscar_barbeiros()
     return response
