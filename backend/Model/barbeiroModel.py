@@ -66,3 +66,11 @@ def buscar_barbeiro(id):
         return {'message': 'Barbeiro não existe!', 'status_code': 404}
     else:
         return {'message': barbeiro, 'status_code': 200}
+    
+def consultar_barbeiro_email(email):
+    dados_barber = db.session.query(Barbeiros).filter_by(email=email).first() 
+    if dados_barber is None:
+        return {'message': 'E-mail Barbeiro não existe!', 'status_code': 404}
+    else:
+        return {'message': dados_barber, 'status_code': 200}
+    
