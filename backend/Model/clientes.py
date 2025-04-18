@@ -8,7 +8,6 @@ class Clientes(db.Model):
     numero_cel = db.Column(db.String(255), nullable=False)
 
 
-
 def adicionar_cliente(form):
     print(form)
     usuario = Clientes(nome=form['nome'], email=form['email'], senha=form['senha'], numero_cel=form['celular'])

@@ -165,3 +165,11 @@ def criar_agendamento(form):
             'error': str(e),
             'status_code': 500
         }
+    
+def listar_agend_barbeiro(id):
+    response = buscar_agend_barbeiro(id)
+    return response
+
+def listar_agend_cliente(id):
+    response = buscar_agend_client(id)
+    return response

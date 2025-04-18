@@ -41,3 +41,39 @@ def verificar_conflito_horario(barber_id, data_agend, inicio_agend, fim_agend):
     return False, None
 
 
+def buscar_agendamentos_por_barbeiro(barbeiro_id):
+    agendamentos = db.session.query(Agendamento).filter_by(barber_id=barbeiro_id).all()
+    
+    if not agendamentos:
+        return {'message': 'Não há agendamentos para esse barbeiro!', 'status_code': 404}
+    
+    informacoes_clientes = [
+        {
+            "id": agendamento.id,
+            "nome": agendamento.nome,
+            "email": agendamento.email,
+            "numero_cel": agendamento.numero_cel
+        }
+        for agendamento in agendamentos
+    ]
+    
+    return {'message': "Agendamentos encontrados", 'status_code': 200, 'informacoes_cliente': informacoes_clientes}
+
+
+def buscar_agendamentos_por_cliente(cliente_id):
+    agendamentos = db.session.query(Agendamento).filter_by(cliente_id=cliente_id).all()
+    
+    if not agendamentos:
+        return {'message': 'Não há agendamentos para esse cliente!', 'status_code': 404}
+    
+    informacoes_agendamentos = [
+        {
+            "id": agendamento.id,
+            "nome": agendamento.nome,
+            "email": agendamento.email,
+            "numero_cel": agendamento.numero_cel
+        }
+        for agendamento in agendamentos
+    ]
+    
+    return {'message': "Agendamentos encontrados", 'status_code': 200, 'informacoes_cliente': informacoes_agendamentos}
