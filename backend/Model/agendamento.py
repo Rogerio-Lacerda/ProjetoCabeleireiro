@@ -7,11 +7,21 @@ class Agendamento(db.Model):
     client_id = db.Column(db.Integer, db.ForeignKey('clientes.id', ondelete="CASCADE"), nullable=False)
     barber_id = db.Column(db.Integer, db.ForeignKey('barbeiros.id', ondelete="CASCADE"), nullable=False)
     service_id = db.Column(db.Integer, db.ForeignKey('servicos.id', ondelete="CASCADE"), nullable=False)
-    data_agend = db.Column(db.String(255), nullable=False, unique=True)
-    inicio_agend = db.Column(db.String(255), nullable=False)
     data_agend = db.Column(Date, nullable=False)
     inicio_agend = db.Column(Time, nullable=False)
     fim_agend = db.Column(Time, nullable=False)
+
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "client_id": self.client_id,
+            "barber_id": self.barber_id,
+            "service_id": self.service_id,
+            "data_agend": self.data_agend.isoformat() if self.data_agend else None,
+            "inicio_agend": self.inicio_agend.strftime('%H:%M') if self.inicio_agend else None,
+            "fim_agend": self.fim_agend.strftime('%H:%M') if self.fim_agend else None
+        }
 
 
 def criar_agendamento_db(data):
@@ -41,39 +51,37 @@ def verificar_conflito_horario(barber_id, data_agend, inicio_agend, fim_agend):
     return False, None
 
 
-def buscar_agendamentos_por_barbeiro(barbeiro_id):
+def buscar_agend_barbeiro(barbeiro_id):
     agendamentos = db.session.query(Agendamento).filter_by(barber_id=barbeiro_id).all()
     
     if not agendamentos:
         return {'message': 'Não há agendamentos para esse barbeiro!', 'status_code': 404}
     
-    informacoes_clientes = [
-        {
-            "id": agendamento.id,
-            "nome": agendamento.nome,
-            "email": agendamento.email,
-            "numero_cel": agendamento.numero_cel
-        }
-        for agendamento in agendamentos
-    ]
     
-    return {'message': "Agendamentos encontrados", 'status_code': 200, 'informacoes_cliente': informacoes_clientes}
+    return {
+    'message': "Agendamentos encontrados",
+    'status_code': 200,
+    'agendamentos': [a.to_dict() for a in agendamentos]
+}
 
 
-def buscar_agendamentos_por_cliente(cliente_id):
-    agendamentos = db.session.query(Agendamento).filter_by(cliente_id=cliente_id).all()
+def buscar_agend_cliente(cliente_id):
+    agendamentos = db.session.query(Agendamento).filter_by(client_id=cliente_id).all()
     
     if not agendamentos:
         return {'message': 'Não há agendamentos para esse cliente!', 'status_code': 404}
-    
-    informacoes_agendamentos = [
-        {
-            "id": agendamento.id,
-            "nome": agendamento.nome,
-            "email": agendamento.email,
-            "numero_cel": agendamento.numero_cel
-        }
-        for agendamento in agendamentos
-    ]
-    
-    return {'message': "Agendamentos encontrados", 'status_code': 200, 'informacoes_cliente': informacoes_agendamentos}
+
+    return {
+    'message': "Agendamentos encontrados",
+    'status_code': 200,
+    'agendamentos': [a.to_dict() for a in agendamentos]
+}
+
+def deletar_agend(id):
+    agendamentos = db.session.query(Agendamento).filter_by(id=id).first()
+    if agendamentos is None:
+        return {'message': 'Agendamento nao Existe', 'status_code': 400}
+    else:
+        db.session.delete(agendamentos)
+        db.session.commit()
+        return {'message': 'Agendamento deletado com sucesso', 'status_code': 200}
