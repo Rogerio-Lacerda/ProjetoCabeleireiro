@@ -38,3 +38,25 @@
     "inicio_agend": "14:30"
   }
   ```
+
+### 3 Listagem de Agendamento
+- **Listar Agendamento Clientes**
+
+  **Endpoint:**
+  ```
+  POST localhost:8888/api/agendamento/cliente/id
+  ```
+- **Listar Agendamento Barbeiro**
+
+  **Endpoint:**
+  ```
+  POST localhost:8888/api/agendamento/barbeiro/id
+  ```
+
+### 4 Delete de Agendamento
+- **Deletar Agendamento**
+
+  **Endpoint:**
+  ```
+  DELETE localhost:8888/api/agendamento/id
+  ```

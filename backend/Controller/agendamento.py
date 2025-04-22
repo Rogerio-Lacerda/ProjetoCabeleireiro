@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta, date, time
 from Model.servicos import BarbeariaServicos
-from Model.agendamento import Agendamento, criar_agendamento_db
+from Model.agendamento import Agendamento, criar_agendamento_db, buscar_agend_barbeiro, buscar_agend_cliente, deletar_agend
 from config.config import db
 
 def validacao_client_id(form):
@@ -162,6 +162,79 @@ def criar_agendamento(form):
     except Exception as e:
         return {
             'message': 'Erro interno ao criar agendamento',
+            'error': str(e),
+            'status_code': 500
+        }
+    
+def listar_agend_barbeiro(id):
+    response = buscar_agend_barbeiro(id)
+    return response
+
+def listar_agend_cliente(id):
+    response = buscar_agend_cliente(id)
+    return response
+
+
+def remover_agend(id):
+    status = deletar_agend(id)
+    return status
+
+
+def editar_agendamento(id, form):
+    # Validar e formatar os dados do agendamento
+    result_validacao = validacao_agendamento(form)
+
+    if isinstance(result_validacao, dict) and 'client_id' not in result_validacao:
+        return {
+            'message': 'Erro na edição do agendamento',
+            'errors': result_validacao,
+            'status_code': 400
+        }
+
+    dados = result_validacao
+
+    # Verificar se o agendamento existe
+    agendamento = Agendamento.query.get(id)
+    if not agendamento:
+        return {
+            'message': 'Agendamento não encontrado.',
+            'status_code': 404
+        }
+
+    # Verificar se existe algum conflito de horário com o barbeiro
+    conflito, _ = verificar_conflito_horario(
+        dados["barber_id"],
+        dados["data_agend"],
+        dados["inicio_agend"],
+        dados["fim_agend"]
+    )
+
+    if conflito:
+        return {
+            'message': 'Conflito de horário: o barbeiro já possui agendamento nesse horário.',
+            'status_code': 409
+        }
+
+    try:
+        # Atualizar os dados do agendamento
+        agendamento.client_id = dados["client_id"]
+        agendamento.barber_id = dados["barber_id"]
+        agendamento.service_id = dados["service_id"]
+        agendamento.data_agend = dados["data_agend"]
+        agendamento.inicio_agend = dados["inicio_agend"]
+        agendamento.fim_agend = dados["fim_agend"]
+
+        db.session.commit()
+
+        return {
+            'message': 'Agendamento editado com sucesso',
+            'agendamento_id': agendamento.id,
+            'status_code': 200
+        }
+
+    except Exception as e:
+        return {
+            'message': 'Erro interno ao editar agendamento',
             'error': str(e),
             'status_code': 500
         }
