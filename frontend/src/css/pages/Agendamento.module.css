@@ -7,11 +7,30 @@
   margin: 0 auto;
 }
 
+.titleContent {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titleContent a {
+  font-size: 0.8rem;
+  color: #db822e;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.titleContent a:hover {
+  text-decoration: underline;
+}
+
 .title {
   font-size: 2rem;
   padding-bottom: 0.5rem;
   color: #db822e;
-  justify-self: center;
 }
 
 .content {

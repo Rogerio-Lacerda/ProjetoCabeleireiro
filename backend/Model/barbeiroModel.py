@@ -68,11 +68,11 @@ def deletar_barbeiro(id):
         return {'message': 'Barbeiro deletado com sucesso!', 'status_code': 200}
 
 def buscar_barbeiro(id):
-    barbeiro = db.session.query(Barbeiros).filter_by(id=id).first()
-    if barbeiro is None:
+    barbeiro_first = db.session.query(Barbeiros).filter_by(id=id).first()
+    if barbeiro_first is None:
         return {'message': 'Barbeiro não existe!', 'status_code': 404}
     else:
-        return {'message': barbeiro, 'status_code': 200}
+        return {'message': barbeiro_first.serialize(), 'status_code': 200}
     
 def consultar_barbeiro_email(dados_login):
     dados_barber = db.session.query(Barbeiros).filter_by(email=dados_login['email']).first() 

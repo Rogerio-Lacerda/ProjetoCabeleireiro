@@ -1,23 +1,24 @@
-import React from "react";
-import styles from "../css/Header.module.css";
-import { NavLink, useNavigate } from "react-router-dom";
-import { UserContext } from "../UserContext";
+import React from 'react';
+import styles from '../css/Header.module.css';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { UserContext } from '../UserContext';
 
 const Header = () => {
   const { user, setUser } = React.useContext(UserContext);
   const navigate = useNavigate();
 
   const loggout = () => {
-    setUser({ isLogin: false, nome: "", id: "0" });
-    navigate("/login");
+    localStorage.removeItem('user');
+    setUser({ isLogin: false, nome: '', id: '0' });
+    navigate('/login');
   };
   const agendamento = () => {
-    navigate("/agendamento");
+    navigate('/agendamento');
   };
 
   return (
     <header className={styles.header}>
-      <h1 className={styles.titulo}>Robson Cabeleiros</h1>
+      <h1 className={styles.titulo}>Robson Cabeleireiros</h1>
       <div className={styles.content}>
         <NavLink to="/" end>
           Home

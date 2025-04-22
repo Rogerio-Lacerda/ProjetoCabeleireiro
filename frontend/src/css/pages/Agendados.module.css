@@ -1,0 +1,104 @@
+.agendados {
+  padding: 2rem;
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 2rem;
+  padding-bottom: 0.5rem;
+  color: #db822e;
+}
+
+.content {
+  display: grid;
+  gap: 1rem;
+}
+
+.content li {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 0.5rem;
+  padding: 1rem 0;
+  border-top: 1px solid #db822e;
+  border-bottom: 1px solid #db822e;
+}
+
+.informacoes {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.datas {
+  display: grid;
+  gap: 0.5rem;
+  grid-column: 1/-1;
+}
+
+.datas p,
+.barbeiro p {
+  color: #db822e;
+  font-size: 1.2rem;
+}
+
+.datas p span,
+.barbeiro p span {
+  color: #000;
+  font-size: 0.9rem;
+}
+
+.divider {
+  display: block;
+  height: 2px;
+  width: 10px;
+  background: #db822e;
+  grid-column: 1/-1;
+}
+
+.barbeiro {
+  grid-column: 1/-1;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  grid-column: 2;
+  justify-self: end;
+}
+
+.buttons button {
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 0.4rem;
+  max-width: max-content;
+  text-align: center;
+  display: block;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.buttonExcluir {
+  background: #b51f21;
+}
+
+.buttonEditar {
+  background: #db822e;
+}
+
+.deleteMessage {
+  color: #0aff0a;
+  justify-self: center;
+  font-size: 1.3rem;
+}
+
+.error {
+  color: #b51f21;
+  justify-self: center;
+  font-size: 1.3rem;
+}

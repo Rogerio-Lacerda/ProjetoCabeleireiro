@@ -24,7 +24,7 @@ const Login = () => {
   const cadastrar = () => {
     navigate('/cadastro-cliente');
   };
-  
+
   React.useEffect(() => {
     if (user && user.isLogin) {
       navigate('/');
@@ -57,8 +57,9 @@ const Login = () => {
           isLogin: true,
           nome: data.message.nome,
           id: data.message.id,
-          user: data.user
+          user: data.user,
         };
+        localStorage.setItem('user', JSON.stringify(loggedUser));
         setUser(loggedUser);
 
         setTimeout(() => {
@@ -119,9 +120,16 @@ const Login = () => {
           ) : null}
 
           <Button texto="Logar" className={styles.button} />
-          
-          <p>Não possui uma conta? <a onClick={cadastrar} style={{ cursor: 'pointer', color: '#b51f21' }}>
-          Cadastre-se</a></p>
+
+          <p>
+            Não possui uma conta?{' '}
+            <a
+              onClick={cadastrar}
+              style={{ cursor: 'pointer', color: '#b51f21' }}
+            >
+              Cadastre-se
+            </a>
+          </p>
         </form>
       </div>
     </>

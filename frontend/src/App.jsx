@@ -6,6 +6,7 @@ import CadastroBarbeiros from './pages/CadastroBarbeiros';
 import Login from './pages/Login';
 import Agendamento from './pages/Agendamento';
 import { GlobalContext } from './UserContext';
+import Agendados from './pages/Agendados';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="cadastro-barbeiro" element={<CadastroBarbeiros />} />
           <Route path="login" element={<Login />} />
           <Route path="/agendamento" element={<Agendamento />} />
+          <Route path="/agendados" element={<Agendados />} />
         </Routes>
       </GlobalContext>
     </BrowserRouter>

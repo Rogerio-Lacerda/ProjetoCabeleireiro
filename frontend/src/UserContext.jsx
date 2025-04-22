@@ -3,7 +3,11 @@ import React from 'react';
 export const UserContext = React.createContext();
 
 export const GlobalContext = ({ children }) => {
-  const [user, setUser] = React.useState({ isLogin: false, nome: '', id: '0' });
+  const [user, setUser] = React.useState(
+    localStorage.getItem('user')
+      ? JSON.parse(localStorage.getItem('user'))
+      : { isLogin: false, nome: '', id: '0' },
+  );
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

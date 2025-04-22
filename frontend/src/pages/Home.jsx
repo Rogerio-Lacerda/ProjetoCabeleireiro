@@ -5,9 +5,9 @@ import styles from '../css/pages/Home.module.css';
 const Home = () => {
   return (
     <>
-    <Header />
+      <Header />
       <div className={styles.home}>
-        <h2 className={styles.title}>Bem vindo a Robson Cabeleleiros!</h2>
+        <h2 className={styles.title}>Bem vindo a Robson Cabeleireiros!</h2>
       </div>
     </>
   );
