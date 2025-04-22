@@ -28,9 +28,11 @@ def consultar_admin(id):
         return {'message': admin, 'status_code': 200}
     
 
-def consultar_admin_email(email):
-    dados_admin = db.session.query(Admin).filter_by(email=email).first() 
+def consultar_admin_email(dados_login):
+    dados_admin = db.session.query(Admin).filter_by(email=dados_login['email']).first() 
     if dados_admin is None:
         return {'message': 'E-mail Administrador não existe!', 'status_code': 404}
+    elif dados_admin.email == dados_login['email'] and dados_admin.senha == dados_login['senha']:
+        return {'message': {'nome': dados_admin.nome, 'email': dados_admin.email, "id": dados_admin.id,"user": 3}, 'status_code': 200}
     else:
-        return {'message': dados_admin, 'status_code': 200}
+        return {'message': 'E-mail ou Senha incoreto!', 'status_code': 400}

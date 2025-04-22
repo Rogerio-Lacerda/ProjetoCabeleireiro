@@ -74,12 +74,14 @@ def buscar_barbeiro(id):
     else:
         return {'message': barbeiro, 'status_code': 200}
     
-def consultar_barbeiro_email(email):
-    dados_barber = db.session.query(Barbeiros).filter_by(email=email).first() 
+def consultar_barbeiro_email(dados_login):
+    dados_barber = db.session.query(Barbeiros).filter_by(email=dados_login['email']).first() 
     if dados_barber is None:
         return {'message': 'E-mail Barbeiro não existe!', 'status_code': 404}
+    elif dados_barber.email == dados_login['email'] and dados_barber.senha == dados_login['senha']:
+        return {'message': {'nome': dados_barber.nome, 'email': dados_barber.email, "id": dados_barber.id,"user": 2}, 'status_code': 200}
     else:
-        return {'message': dados_barber, 'status_code': 200}
+        return {'message': 'E-mail ou Senha incoreto!', 'status_code': 400}
     
 def buscar_barbeiros():
     barbeiros = db.session.query(Barbeiros).all()

@@ -67,7 +67,7 @@ def consultar_cliente(dados_login):
     if dados_cliente is None:
         return {'message': 'E-mail não existe!', 'status_code': 404}
     elif dados_cliente.email == dados_login['email'] and dados_cliente.senha == dados_login['senha']:
-        return {'message': {'nome': dados_cliente.nome, 'email': dados_cliente.email, "id": dados_cliente.id}, 'status_code': 200}
+        return {'message': {'nome': dados_cliente.nome, 'email': dados_cliente.email, "id": dados_cliente.id,"user": 1}, 'status_code': 200}
     else:
-        return {'message': 'E-mail ou Senha incoreto!', 'status_code': 404}
+        return {'message': 'E-mail ou Senha incoreto!', 'status_code': 400}
     
