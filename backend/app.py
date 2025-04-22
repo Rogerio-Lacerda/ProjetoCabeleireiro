@@ -7,7 +7,7 @@ from Routes.servicos import servicos_blueprint
 from Routes.agend import agendamento_blueprint
 from flask_cors import CORS
 
-CORS(app) 
+CORS(app, origins=["http://localhost:5173"]) 
 
 app.register_blueprint(clientes_blueprint)
 app.register_blueprint(barbeiro_blueprint)

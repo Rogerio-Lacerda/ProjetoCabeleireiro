@@ -21,6 +21,10 @@ const Login = () => {
     setForm({ ...form, [e.target.id]: e.target.value });
   };
 
+  const cadastrar = () => {
+    navigate('/cadastro-cliente');
+  };
+  
   React.useEffect(() => {
     if (user && user.isLogin) {
       navigate('/');
@@ -53,6 +57,7 @@ const Login = () => {
           isLogin: true,
           nome: data.message.nome,
           id: data.message.id,
+          user: data.user
         };
         setUser(loggedUser);
 
@@ -68,12 +73,6 @@ const Login = () => {
         if (data) {
           setError([data.message]);
         }
-
-        // if (data.message === 'Senha incorreta!') {
-        //   setError([data.message]);
-        // } else if (data.message === 'Usuário não encontrado!') {
-        //   setError([data.message]);
-        // }
       }
     } catch (error) {
       console.error('Erro na requisição:', error);
@@ -120,6 +119,9 @@ const Login = () => {
           ) : null}
 
           <Button texto="Logar" className={styles.button} />
+          
+          <p>Não possui uma conta? <a onClick={cadastrar} style={{ cursor: 'pointer', color: '#b51f21' }}>
+          Cadastre-se</a></p>
         </form>
       </div>
     </>

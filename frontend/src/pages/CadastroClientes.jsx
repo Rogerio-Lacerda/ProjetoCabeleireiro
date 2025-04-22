@@ -22,6 +22,10 @@ const CadastroClientes = () => {
     setForm({ ...form, [id]: value });
   };
 
+  const login = () => {
+    navigate('/login');
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -124,6 +128,9 @@ const CadastroClientes = () => {
           ) : null}
 
           <Button texto="Cadastrar" className={styles.button} />
+
+          <p>Já possui uma conta? <a onClick={login} style={{ cursor: 'pointer', color: '#b51f21' }}>
+          Logar</a></p>
         </form>
       </div>
     </>

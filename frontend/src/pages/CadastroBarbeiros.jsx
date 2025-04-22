@@ -71,7 +71,9 @@ const CadastroBarbeiros = () => {
   };
 
   return (
+    
     <>
+    <Header />
       <div className={styles.cadastro}>
         <form className={styles.form} onSubmit={handleSubmit}>
           <h2>Cadastro Barbeiros</h2>

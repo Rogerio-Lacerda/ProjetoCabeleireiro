@@ -1,5 +1,4 @@
 import './App.css';
-import Header from './layout/Header';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import CadastroClientes from './pages/CadastroClientes';
@@ -12,7 +11,6 @@ function App() {
   return (
     <BrowserRouter>
       <GlobalContext>
-        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="cadastro-cliente" element={<CadastroClientes />} />
