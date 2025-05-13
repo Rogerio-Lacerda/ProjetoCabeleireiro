@@ -51,14 +51,16 @@ const Login = () => {
         console.log('Seja bem vindo!', data);
 
         setError('');
-        setSucess('Usuário logado com sucesso!');
+        setSucess('Usuário logado com sucesso!'); 
 
         const loggedUser = {
           isLogin: true,
           nome: data.message.nome,
           id: data.message.id,
-          user: data.user,
+          user: data.message.user,
         };
+        console.log('teste',loggedUser);
+        
         localStorage.setItem('user', JSON.stringify(loggedUser));
         setUser(loggedUser);
 

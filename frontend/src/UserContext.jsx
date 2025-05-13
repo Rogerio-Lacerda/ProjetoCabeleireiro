@@ -6,7 +6,7 @@ export const GlobalContext = ({ children }) => {
   const [user, setUser] = React.useState(
     localStorage.getItem('user')
       ? JSON.parse(localStorage.getItem('user'))
-      : { isLogin: false, nome: '', id: '0' },
+      : { isLogin: false, nome: '', id: '0', user: 0 },
   );
 
   return (

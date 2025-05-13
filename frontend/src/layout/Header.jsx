@@ -9,11 +9,15 @@ const Header = () => {
 
   const loggout = () => {
     localStorage.removeItem('user');
-    setUser({ isLogin: false, nome: '', id: '0' });
+    setUser({ isLogin: false, nome: '', id: '0', user: 0 });
     navigate('/login');
   };
   const agendamento = () => {
-    navigate('/agendamento');
+    if(user.user === 2){
+      navigate('/agendamento-barbeiro');
+    }else if(user.user === 1){
+      navigate('/agendamento');
+    }
   };
 
   return (

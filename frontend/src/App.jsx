@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Agendamento from './pages/Agendamento';
 import { GlobalContext } from './UserContext';
 import Agendados from './pages/Agendados';
+import AgendamentoBarbeiro from './pages/AgendamentoBarbeiro';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="/agendamento" element={<Agendamento />} />
           <Route path="/agendados" element={<Agendados />} />
+          <Route path="/agendamento-barbeiro" element={<AgendamentoBarbeiro />} />
         </Routes>
       </GlobalContext>
     </BrowserRouter>
