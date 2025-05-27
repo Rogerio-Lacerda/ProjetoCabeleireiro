@@ -125,6 +125,7 @@
   grid-template-columns: 1fr 2fr;
   align-items: start;
   gap: 2rem;
+  max-height: 1000px;
 }
 
 .subtitle {
@@ -154,6 +155,8 @@
 .barbeiros {
   display: grid;
   gap: 1rem;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 .barbeiros h2 {
