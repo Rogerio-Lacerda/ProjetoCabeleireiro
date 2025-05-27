@@ -168,6 +168,9 @@ const Agendamento = () => {
 
               <ul>
                 {datas.map((data, index) => {
+                  if (index === 0) {
+                    return null;
+                  }
                   return (
                     <li
                       key={index}

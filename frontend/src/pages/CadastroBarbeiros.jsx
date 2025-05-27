@@ -5,6 +5,7 @@ import Button from '../components/Button';
 import Input from '../components/Input';
 import { useNavigate } from 'react-router-dom';
 import Error from '../components/Error';
+import { UserContext } from '../UserContext';
 
 const CadastroBarbeiros = () => {
   const [form, setForm] = React.useState({
@@ -18,6 +19,7 @@ const CadastroBarbeiros = () => {
   const [error, setError] = React.useState('');
   const [sucess, setSucess] = React.useState('');
   const navigate = useNavigate();
+  const { user } = React.useContext(UserContext);
 
   const handleChange = ({ target }) => {
     const { id, value } = target;
@@ -31,7 +33,7 @@ const CadastroBarbeiros = () => {
 
     try {
       const response = await fetch(
-        'http://127.0.0.1:8888/api/barbeiro/cadastro/1',
+        `http://127.0.0.1:8888/api/barbeiro/cadastro/${user.id}`,
         {
           method: 'POST',
           headers: {
@@ -71,9 +73,8 @@ const CadastroBarbeiros = () => {
   };
 
   return (
-    
     <>
-    <Header />
+      <Header />
       <div className={styles.cadastro}>
         <form className={styles.form} onSubmit={handleSubmit}>
           <h2>Cadastro Barbeiros</h2>

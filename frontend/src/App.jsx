@@ -20,7 +20,10 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="/agendamento" element={<Agendamento />} />
           <Route path="/agendados" element={<Agendados />} />
-          <Route path="/agendamento-barbeiro" element={<AgendamentoBarbeiro />} />
+          <Route
+            path="/agendamento-barbeiro"
+            element={<AgendamentoBarbeiro />}
+          />
         </Routes>
       </GlobalContext>
     </BrowserRouter>

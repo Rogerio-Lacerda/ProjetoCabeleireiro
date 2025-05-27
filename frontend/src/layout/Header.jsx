@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '../css/Header.module.css';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { UserContext } from '../UserContext';
 
 const Header = () => {
@@ -13,9 +13,9 @@ const Header = () => {
     navigate('/login');
   };
   const agendamento = () => {
-    if(user.user === 2){
+    if (user.user === 2) {
       navigate('/agendamento-barbeiro');
-    }else if(user.user === 1){
+    } else if (user.user === 1) {
       navigate('/agendamento');
     }
   };
@@ -28,7 +28,11 @@ const Header = () => {
           Home
         </NavLink>
 
-        <a onClick={agendamento}>Agendamento</a>
+        {user.user === 3 ? (
+          <Link to="/cadastro-barbeiro">Cadastrar Barbeiros</Link>
+        ) : (
+          <a onClick={agendamento}>Agendamento</a>
+        )}
 
         <div className={styles.user}>
           {user.nome}
