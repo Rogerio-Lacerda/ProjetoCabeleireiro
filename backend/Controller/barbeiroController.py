@@ -139,20 +139,20 @@ def validacao_form(form):
         return True
 
 def criar_barbeiro(form, idAdmin):
-    # validar_admin = consultar_admin(idAdmin)
-    # if validar_admin['status_code'] == 200:
-    #     result_validacao = validacao_form(form)
-    #     if result_validacao != True:
-    #         return {'message': 'Erro no cadastro do barbeiro', 'errors': result_validacao, 'status_code': 400}
+    validar_admin = consultar_admin(idAdmin)
+    if validar_admin['status_code'] == 200:
+        result_validacao = validacao_form(form)
+        if result_validacao != True:
+            return {'message': 'Erro no cadastro do barbeiro', 'errors': result_validacao, 'status_code': 400}
         
-    #     existe_barbeiro = validacao_barbeiro(form)
+        existe_barbeiro = validacao_barbeiro(form)
 
-    #     if existe_barbeiro != True:
-    #         return existe_barbeiro
+        if existe_barbeiro != True:
+            return existe_barbeiro
 
         response = adicionar_barbeiro(form)
         return response
-    # return validar_admin
+    return validar_admin
 
 def alter_validacao_nome(form):
     if 'nome' not in form:
