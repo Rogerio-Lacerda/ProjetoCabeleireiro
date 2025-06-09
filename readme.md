@@ -59,4 +59,58 @@
   **Endpoint:**
   ```
   DELETE localhost:8888/api/agendamento/id
+<<<<<<< HEAD
+=======
+  ```
+
+### 5 Cadastrar Servicos
+- **Cadastrar Servicos**
+  
+  **Endpoint:**
+  ```
+  POST localhost:8888/api/servicos/cadastro
+  ```
+
+  **JSON de Requisição:**
+  ```json
+    {
+    "nome": "Corte Tradicional",
+    "descricao": "Corte padrão com tesoura e máquina.",
+    "preco": 50.0,
+    "duracao_minutos": 30
+    }
+  ```
+
+### 6 Listagem Servicos
+- **Listar todos os Servicos**
+  
+  **Endpoint:**
+  ```
+  GET localhost:8888/api/servicos
+  ```
+
+### 7 Editar Servico
+- **Editar  Servico**
+  
+  **Endpoint:**
+  ```
+  PUT localhost:8888/api/servicos/{id_servico}
+  ```
+  **JSON de Requisição:**
+  ```json
+    {
+    "nome": "Corte Tradicional",
+    "descricao": "Corte padrão com tesoura e máquina.",
+    "preco": 50.0,
+    "duracao_minutos": 30
+    }
+  ```
+
+### 8 Excluir Servicos
+- **Listar todos os Servicos**
+  
+  **Endpoint:**
+  ```
+  DELETE localhost:8888/api/servicos/{id_servico}
+>>>>>>> fff97ad (feature/servicos)
   ```
