@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta, date, time
 from Model.agendamento import Agendamento, criar_agendamento_db, buscar_agend_barbeiro, buscar_agend_cliente, deletar_agend
+from Model.servicos import BarbeariaServico
 from config.config import db
 
 def validacao_client_id(form):
@@ -54,7 +55,7 @@ def validacao_inicio_agend(form):
         raise ValueError("Formato de hora inválido. Use 'HH:MM'.")
 
 def buscar_duracao_servico(service_id):
-    servico = BarbeariaServicos.query.filter_by(id=service_id).first()
+    servico = BarbeariaServico.query.filter_by(id=service_id).first()
     if not servico:
         raise ValueError("Serviço não encontrado.")
     return servico.duracao_minutos  # em minutos
