@@ -1,5 +1,4 @@
 from datetime import datetime, timedelta, date, time
-from Model.servicos import BarbeariaServicos
 from Model.agendamento import Agendamento, criar_agendamento_db, buscar_agend_barbeiro, buscar_agend_cliente, deletar_agend
 from config.config import db
 
