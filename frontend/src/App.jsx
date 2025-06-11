@@ -8,6 +8,9 @@ import Agendamento from './pages/Agendamento';
 import { GlobalContext } from './UserContext';
 import Agendados from './pages/Agendados';
 import AgendamentoBarbeiro from './pages/AgendamentoBarbeiro';
+import Servicos from './pages/Servicos';
+import CadastrarServicos from './pages/CadastrarServicos';
+import ExcluirServico from './pages/ExcluirServico';
 
 function App() {
   return (
@@ -18,12 +21,15 @@ function App() {
           <Route path="cadastro-cliente" element={<CadastroClientes />} />
           <Route path="cadastro-barbeiro" element={<CadastroBarbeiros />} />
           <Route path="login" element={<Login />} />
-          <Route path="/agendamento" element={<Agendamento />} />
+          <Route path="/agendamento/:id" element={<Agendamento />} />
           <Route path="/agendados" element={<Agendados />} />
           <Route
             path="/agendamento-barbeiro"
             element={<AgendamentoBarbeiro />}
           />
+          <Route path="/servicos" element={<Servicos />} />
+          <Route path="/cadastro-servicos" element={<CadastrarServicos />} />
+          <Route path="/excluir-servicos" element={<ExcluirServico />} />
         </Routes>
       </GlobalContext>
     </BrowserRouter>

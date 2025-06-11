@@ -16,7 +16,7 @@ const Header = () => {
     if (user.user === 2) {
       navigate('/agendamento-barbeiro');
     } else if (user.user === 1) {
-      navigate('/agendamento');
+      navigate('/servicos');
     }
   };
 
@@ -29,9 +29,14 @@ const Header = () => {
         </NavLink>
 
         {user.user === 3 ? (
-          <Link to="/cadastro-barbeiro">Cadastrar Barbeiros</Link>
+          <>
+            <Link to="/cadastro-barbeiro">Cadastrar Barbeiros</Link>
+            <Link to="/cadastro-servicos">Cadastrar Serviços</Link>
+          </>
         ) : (
-          <a onClick={agendamento}>Agendamento</a>
+          <a onClick={agendamento}>
+            {user.user === 2 ? 'Agendamentos' : 'Serviços'}
+          </a>
         )}
 
         <div className={styles.user}>
@@ -45,27 +50,6 @@ const Header = () => {
             </ul>
           </nav>
         </div>
-
-        {/* <div className={styles.cadastro}>
-          Cadastro
-          <nav className={styles.nav}>
-            <div className={styles.arrow}></div>
-            <ul>
-              <li>
-                <NavLink to="cadastro-cliente" end>
-                  Clientes
-                  <span>→</span>
-                </NavLink>
-              </li>
-              <div className={styles.divider}></div>
-              <li>
-                <NavLink to="cadastro-barbeiro">
-                  Barbeiros <span>→</span>
-                </NavLink>
-              </li>
-            </ul>
-          </nav>
-        </div> */}
       </div>
     </header>
   );

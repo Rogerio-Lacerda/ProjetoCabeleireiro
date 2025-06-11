@@ -22,6 +22,11 @@ const Agendados = () => {
   const [datas, setDatas] = React.useState([]);
   const [idData, setIdData] = React.useState(0);
 
+  const [servicos, setServicos] = React.useState([]);
+  const [agendamentosComServico, setAgendamentosComServico] =
+    React.useState('');
+  const [servicoId, setServicoId] = React.useState(2);
+
   const horas = [
     '09:00',
     '10:00',
@@ -36,7 +41,7 @@ const Agendados = () => {
   ];
   const [idHoras, setIdHoras] = React.useState(0);
 
-  const [sucess, setSucess] = React.useState('');
+  const [, setSucess] = React.useState('');
 
   React.useEffect(() => {
     const hoje = new Date();
@@ -65,7 +70,7 @@ const Agendados = () => {
     }
     const client_id = Number(user.id);
     const barber_id = Number(idBarbeiro);
-    const service_id = 1;
+    const service_id = Number(servicoId);
     const inicio_agend = horas[idHoras];
     const dataOriginal = datas[idData];
     const [dia, mes, ano] = dataOriginal.split('/');
@@ -97,12 +102,10 @@ const Agendados = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setError('');
         setMutation(!mutation);
-        setSucess(data.message);
+        alert(data.message);
       } else {
-        setSucess('');
-        setError(data.message);
+        alert(data.message);
       }
     } catch (error) {
       console.error('Erro na requisição:', error);
@@ -261,6 +264,49 @@ const Agendados = () => {
     return formatada;
   };
 
+  React.useEffect(() => {
+    const servicosFetch = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8888/api/servicos', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const data = await response.json();
+
+        if (response.ok) {
+          console.log('certo', data);
+          setServicos(data);
+        } else {
+          console.log('errado', data);
+          setServicos([]);
+        }
+      } catch (error) {
+        console.error('Error ao fazer requisição', error);
+        setServicos([]);
+      }
+    };
+    servicosFetch();
+  }, []);
+
+  React.useEffect(() => {
+    if (servicos.length > 0 && agendamentosAtualizados.length > 0) {
+      const agendamentosComServico = agendamentosAtualizados.map(
+        (agendamento) => {
+          const servico = servicos.find((s) => s.id === agendamento.service_id);
+          return {
+            ...agendamento,
+            servico: servico || {},
+          };
+        },
+      );
+      setAgendamentosComServico(agendamentosComServico);
+    } else {
+      setAgendamentosComServico([]);
+    }
+  }, [servicos, agendamentosAtualizados]);
+
   return (
     <>
       <Header />
@@ -272,10 +318,19 @@ const Agendados = () => {
 
         <h2 className={styles.title}>Meus agendamentos</h2>
 
-        {agendamentosAtualizados.length > 0 ? (
+        {agendamentosComServico.length > 0 ? (
           <ul className={styles.content}>
-            {agendamentosAtualizados.map(
-              ({ id, data_agend, inicio_agend, fim_agend, nome_barbeiro }) => {
+            {agendamentosComServico.map(
+              ({
+                id,
+                data_agend,
+                inicio_agend,
+                fim_agend,
+                nome_barbeiro,
+
+                servico,
+              }) => {
+                console.log('eu quero', servico);
                 return (
                   <li key={`Agend${id}`}>
                     <div className={styles.informacoes}>
@@ -294,6 +349,24 @@ const Agendados = () => {
                       <div className={styles.barbeiro}>
                         <p>
                           Barbeiro: <span>{nome_barbeiro}</span>
+                        </p>
+                      </div>
+                      <div className={styles.divider}></div>
+                      <div className={styles.servicos}>
+                        <p>
+                          Serviço: <span>{servico.nome}</span>
+                        </p>
+                        <p>
+                          Duração: <span>{servico.duracao} minutos</span>
+                        </p>
+                        <p>
+                          Preço:{' '}
+                          <span>
+                            {servico.preco.toLocaleString('pt-BR', {
+                              style: 'currency',
+                              currency: 'BRL',
+                            })}
+                          </span>
                         </p>
                       </div>
                     </div>
@@ -330,7 +403,41 @@ const Agendados = () => {
               X
             </button>
 
-            <h2 className={styles.subtitle}>Editar agendamento</h2>
+            <div className={styles.servicosEditar}>
+              <h2>Escolher serviço</h2>
+              <div className={styles.servicosEditarContainer}>
+                {servicos && servicos.length > 0
+                  ? servicos.map((item) => {
+                      return (
+                        <>
+                          <div
+                            className={styles.servicosEditarContent}
+                            key={item.id}
+                          >
+                            <div
+                              className={styles.servicosEditarContentHorario}
+                            >
+                              <h2>{item.nome}</h2>
+                              <p>{item.duracao} minutos</p>
+                            </div>
+                            <div className={styles.servicosEditarContentbutton}>
+                              <p>
+                                {item.preco.toLocaleString('pt-BR', {
+                                  style: 'currency',
+                                  currency: 'BRL',
+                                })}
+                              </p>
+                              <button onClick={() => setServicoId(item.id)}>
+                                Selecionar
+                              </button>
+                            </div>
+                          </div>
+                        </>
+                      );
+                    })
+                  : null}
+              </div>
+            </div>
             <div className={styles.barbeiros}>
               <h2>Barbeiros</h2>
               <ul>
@@ -393,8 +500,6 @@ const Agendados = () => {
                 <Button texto="Reagendar" onClick={handleClick} />
               </div>
             </div>
-            {sucess ? <p className={styles.sucessReagendar}>{sucess}</p> : null}
-            {error ? <p className={styles.errorReagendar}>{error}</p> : null}
           </div>
         </section>
       ) : null}

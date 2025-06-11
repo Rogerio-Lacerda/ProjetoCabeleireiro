@@ -15,6 +15,7 @@
 
 .content {
   display: grid;
+  /* grid-template-columns: 1fr 1fr; */
   gap: 1rem;
 }
 
@@ -30,6 +31,7 @@
 
 .informacoes {
   display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 0.5rem;
 }
 
@@ -37,16 +39,24 @@
   display: grid;
   gap: 0.5rem;
   grid-column: 1/-1;
+  justify-self: start;
+}
+
+.servicos {
+  display: grid;
+  gap: 1rem;
 }
 
 .datas p,
-.barbeiro p {
+.barbeiro p,
+.servicos p {
   color: #db822e;
   font-size: 1.2rem;
 }
 
 .datas p span,
-.barbeiro p span {
+.barbeiro p span,
+.servicos p span {
   color: #000;
   font-size: 0.9rem;
 }
@@ -125,7 +135,8 @@
   grid-template-columns: 1fr 2fr;
   align-items: start;
   gap: 2rem;
-  max-height: 1000px;
+  max-height: 600px;
+  overflow-y: auto;
 }
 
 .subtitle {
@@ -155,7 +166,7 @@
 .barbeiros {
   display: grid;
   gap: 1rem;
-  max-height: 400px;
+  max-height: 300px;
   overflow-y: auto;
 }
 
@@ -281,11 +292,75 @@
 .sucessReagendar {
   color: #0aff0a;
   justify-self: center;
-  font-size: 1.3rem;
+  font-size: 0.8rem;
+  grid-column: 2;
 }
 
 .errorReagendar {
   color: #b51f21;
-  justify-self: center;
-  font-size: 1.3rem;
+  justify-self: start;
+  font-size: 0.9rem;
+  grid-column: 2;
+}
+
+.servicosEditar {
+  grid-column: 1/-1;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.servicosEditar h2 {
+  color: #4d2c0f;
+}
+
+.servicosEditar h2::after {
+  content: '';
+  height: 4px;
+  width: 20px;
+  background: #4d2c0f;
+  border-radius: 0.5rem;
+  display: block;
+}
+
+.servicosEditarContainer {
+  display: grid;
+  gap: 1rem;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.servicosEditarContent {
+  padding: 0.5rem;
+  display: grid;
+  gap: 0.5rem;
+  border: 1px solid #db822e;
+  border-radius: 0.5rem;
+  max-height: 200px;
+}
+
+.servicosEditarContentbutton {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.servicosEditarContentbutton p {
+  font-size: 1.2rem;
+  color: #db822e;
+  font-weight: 800;
+}
+
+.servicosEditarContentbutton button {
+  background-color: #db822e;
+  border: none;
+  padding: 0.5rem;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 0.5rem;
+}
+
+.servicosEditarContentHorario p {
+  color: #db822e;
+  font-size: 0.8rem;
 }

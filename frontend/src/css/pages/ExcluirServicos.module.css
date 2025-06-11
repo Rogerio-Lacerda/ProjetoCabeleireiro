@@ -1,0 +1,69 @@
+.servicos {
+  padding: 2rem;
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 2rem;
+  padding-bottom: 0.5rem;
+  color: #db822e;
+  justify-self: center;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.content {
+  padding: 1rem;
+  display: grid;
+  gap: 0.5rem;
+  border: 1px solid #db822e;
+  border-radius: 0.5rem;
+}
+
+.contentButton {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contentButton p {
+  font-size: 1.2rem;
+  color: #db822e;
+  font-weight: 800;
+}
+
+.contentHorario p {
+  color: #db822e;
+  font-size: 0.8rem;
+}
+
+.btnExcluir {
+  cursor: pointer;
+  border: none;
+  border-radius: 0.4rem;
+  min-width: 8rem;
+  max-width: max-content;
+  text-align: center;
+  display: block;
+  background: #b51f21;
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  transition: 0.1s;
+  font-size: 1.2rem;
+  justify-self: center;
+}
+
+.btnExcluir:hover,
+.btnExcluir:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px #fea, 0 0 0 4px #fb1;
+}

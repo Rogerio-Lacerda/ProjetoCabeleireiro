@@ -3,7 +3,7 @@ import styles from '../css/pages/Agendamento.module.css';
 import Button from '../components/Button';
 import { UserContext } from '../UserContext';
 import Header from '../layout/Header';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const Agendamento = () => {
   const [barbeiros, setBarbeiros] = React.useState([]);
@@ -11,6 +11,10 @@ const Agendamento = () => {
 
   const [datas, setDatas] = React.useState([]);
   const [idData, setIdData] = React.useState(0);
+
+  const params = useParams();
+
+  console.log('teste legal', params.id);
 
   const horas = [
     '09:00',
@@ -85,7 +89,7 @@ const Agendamento = () => {
     }
     const client_id = Number(user.id);
     const barber_id = Number(idBarbeiro);
-    const service_id = 1;
+    const service_id = Number(params.id);
     const inicio_agend = horas[idHoras];
     const dataOriginal = datas[idData];
     const [dia, mes, ano] = dataOriginal.split('/');
@@ -146,7 +150,7 @@ const Agendamento = () => {
             <h2>Barbeiros</h2>
             <ul>
               {barbeiros.length > 0
-                ? barbeiros.map(({ id, nome, especialidade }) => {
+                ? barbeiros.map(({ id, nome }) => {
                     return (
                       <li
                         key={`${nome}${id}`}
@@ -155,7 +159,7 @@ const Agendamento = () => {
                           idBarbeiro === id ? styles.barbeiroSelected : ''
                         }
                       >
-                        {nome} - <span>{especialidade}</span>
+                        {nome}
                       </li>
                     );
                   })
